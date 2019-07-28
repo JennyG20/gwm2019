@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" maxHeight="750.0" maxWidth="1000.0" minHeight="750.0" minWidth="1000.0" pickOnBounds="false" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Controller">
+   <children>
+      <VBox fx:id="content" alignment="CENTER" prefHeight="750.0" prefWidth="1000.0">
+         <children>
+            <Label text="Please sign in" />
+            <TextField fx:id="username_txt" maxWidth="120.0" promptText="Username" text="student">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="password_txt" layoutX="10.0" layoutY="10.0" maxWidth="120.0" promptText="Password" text="student">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="signin_btn" mnemonicParsing="false" onAction="#login_buttonPressed" text="Button">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
