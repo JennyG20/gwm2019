@@ -3,13 +3,15 @@ public class Task {
     private int ID, assessment;
     private String description, deadline;
     private String[] collaborators;
+    private Integer[] collaboratorsID;
 
-    public Task(int ID, int assessment, String description, String deadline, String[] collaborators) {
+    public Task(int ID, int assessment, String description, String deadline, String[] collaborators, Integer[] collaboratorsID) {
         this.ID = ID;
         this.assessment = assessment;
         this.description = description;
         this.deadline = deadline;
         this.collaborators = collaborators;
+        this.collaboratorsID = collaboratorsID;
     }
 
     public String getCollaboratorsAsOneString() {
@@ -17,8 +19,13 @@ public class Task {
         for (String s : collaborators) {
             collaboratorString += s + ", ";
         }
+        if(collaboratorString.length()==0) return "No collaborators";
 
-        return collaboratorString.substring(0, collaboratorString.length()-3);
+        return collaboratorString.substring(0, collaboratorString.length()-2);
+    }
+
+    public Post[] getPosts() {
+        return Core.db.getPosts(ID);
     }
 
     public int getID() {
@@ -59,5 +66,13 @@ public class Task {
 
     public void setCollaborators(String[] collaborators) {
         this.collaborators = collaborators;
+    }
+
+    public Integer[] getCollaboratorsID() {
+        return collaboratorsID;
+    }
+
+    public void setCollaboratorsID(Integer[] collaboratorsID) {
+        this.collaboratorsID = collaboratorsID;
     }
 }

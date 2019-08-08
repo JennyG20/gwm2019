@@ -94,3 +94,22 @@ CREATE TABLE `main`.`part_task` (
     REFERENCES `main`.`task` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+CREATE TABLE `main`.`post` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `task` INT NOT NULL,
+  `user` INT NOT NULL,
+  `text` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user_idx` (`user` ASC) VISIBLE,
+  INDEX `task_idx` (`task` ASC) VISIBLE,
+  CONSTRAINT `post_user`
+    FOREIGN KEY (`user`)
+    REFERENCES `main`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `post_task`
+    FOREIGN KEY (`task`)
+    REFERENCES `main`.`task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

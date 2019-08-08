@@ -20,7 +20,7 @@ public class Assessment {
             collaboratorString += s + ", ";
         }
 
-        return collaboratorString.substring(0, collaboratorString.length()-3);
+        return collaboratorString.substring(0, collaboratorString.length()-2);
     }
 
     public Task[] getTasks() {

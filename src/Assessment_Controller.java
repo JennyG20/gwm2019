@@ -57,7 +57,7 @@ public class Assessment_Controller implements Initializable {
 
         description_label.setText("Assessment description: " + assessment.getDesc());
 
-        supervisor_label.setText("Supervised by: " + assessment.getSupervisor());
+        supervisor_label.setText("Supervised by: " + Core.db.getUserName(assessment.getSupervisor()));
 
         collaborators_label.setText("Collaborators: " + assessment.getCollaboratorsAsOneString());
 
@@ -66,7 +66,7 @@ public class Assessment_Controller implements Initializable {
         int k = 0;
         for(Task task : assessment.getTasks()){
             k++;
-            addTask(task.getID(), task.getAssessment(), task.getDescription(), task.getDeadline(), task.getCollaboratorsAsOneString(), k);
+            addTask(task, k);
         }
     }
 
@@ -75,7 +75,7 @@ public class Assessment_Controller implements Initializable {
         Core.loadScene(Core.MAIN, null);
     }
 
-    private void addTask(int id, int assessment, String desc, String deadline, String collaborators, int num){
+    private void addTask(Task task, int num){
         TitledPane titledPane = new TitledPane();
         titledPane.setPrefWidth(780);
         titledPane.setMaxWidth(780);
@@ -91,24 +91,48 @@ public class Assessment_Controller implements Initializable {
 
         Label label1 = new Label();
 
-        label1.setText("Collaborators: " + collaborators);
+        label1.setText("Collaborators: " + task.getCollaboratorsAsOneString());
         label1.setPadding(new Insets(10,15,0,15));
 
         Label label2 = new Label();
-        label2.setText("Deadline: " + deadline);
+        label2.setText("Deadline: " + task.getDeadline());
         label2.setPadding(new Insets(10,15,0,15));
 
         Label label3 = new Label();
-        label3.setText("Description: " + desc);
+        label3.setText("Description: " + task.getDescription());
         label3.setPadding(new Insets(10,15,10,15));
         label3.setWrapText(true);
 
         Button button1 = new Button();
         button1.setText("Open");
         button1.setOnAction(event -> {
-
+            Core.loadScene(Core.TASK, new Object[]{task, assessment});
         });
 
+        boolean alreadyCollaborator = false;
+
+        Button button2 = new Button();
+
+        for(int i : task.getCollaboratorsID()){
+            if(Core.getUser().getId() == i){
+                alreadyCollaborator = true;
+            }
+        }
+
+        if(alreadyCollaborator){
+            button2.setDisable(true);
+            button2.setText("Already Collaborator");
+        } else {
+            button2.setText("Add As Collaborator");
+            button2.setOnAction(event -> {
+                Core.db.addCollaborator(task.getID(), Core.getUser().getId());
+                button2.setDisable(true);
+                button2.setText("Already Collaborator");
+            });
+        }
+
+        vBox.getChildren().add(button2);
+        vBox.getChildren().add(button1);
         vBox.getChildren().add(label1);
         vBox.getChildren().add(label2);
         vBox.getChildren().add(label3);

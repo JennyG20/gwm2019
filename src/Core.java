@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Core {
 
-    public static final int LOGIN = 0, MAIN = 1, TASK = 2;
+    public static final int LOGIN = 0, MAIN = 1, ASMT = 2, TASK = 3;
 
     public static AnchorPane root;
     static DB db;
@@ -31,14 +31,19 @@ public class Core {
             case LOGIN:
                 loader.setLocation(Login_Controller.class.getResource("Login.fxml"));
                 new Login_Controller();
+                user = null;
                 break;
             case MAIN:
                 loader.setLocation(Login_Controller.class.getResource("Main.fxml"));
                 break;
-            case TASK:
+            case ASMT:
                 Assessment_Controller.assessment = (Assessment) params[0];
                 loader.setLocation(Login_Controller.class.getResource("Assessment.fxml"));
                 break;
+            case TASK:
+                Task_Controller.task = (Task) params[0];
+                Task_Controller.assessment = (Assessment) params[1];
+                loader.setLocation(Login_Controller.class.getResource("Task.fxml"));
         }
 
         try {

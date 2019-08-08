@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -12,7 +10,6 @@ import javafx.scene.text.FontWeight;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 public class Main_Controller implements Initializable {
 
@@ -39,6 +36,16 @@ public class Main_Controller implements Initializable {
         for(Assessment asmt : Core.getUser().getAssessments()){
             addAssessment(asmt);
         }
+    }
+
+    @FXML
+    private void onSettingsButtonPressed(){
+
+    }
+
+    @FXML
+    private void onSignOutButtonPressed(){
+        Core.loadScene(Core.LOGIN, null);
     }
 
     private void addAssessment(Assessment asmt){
