@@ -75,6 +75,16 @@ public class Assessment_Controller implements Initializable {
         Core.loadScene(Core.MAIN, null);
     }
 
+    @FXML
+    private void onSettingsButtonPressed(){
+        Core.loadScene(Core.SETTINGS, null);
+    }
+
+    @FXML
+    private void onSignOutButtonPressed(){
+        Core.loadScene(Core.LOGIN, null);
+    }
+
     private void addTask(Task task, int num){
         TitledPane titledPane = new TitledPane();
         titledPane.setPrefWidth(780);

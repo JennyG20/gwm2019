@@ -1,3 +1,4 @@
+import java.net.Socket;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -29,22 +30,36 @@ public class DB {
 
     public Assessment[] getAssessmentsByUser(int id) {
         ArrayList<Assessment> assessments = new ArrayList<>();
-        ResultSet rs = executeQuery("SELECT assessment FROM part_assessment WHERE user = " + id + ";");
+        ResultSet rs;
+
+        if(getUserType(id).equals("student")){
+            rs = executeQuery("SELECT assessment FROM part_assessment WHERE user = " + id + ";");
+        } else if(getUserType(id).equals("teacher")){
+            rs = executeQuery("SELECT * FROM assessment WHERE supervisor = " + id + ";");
+        } else {
+            rs = executeQuery("SELECT * FROM assessment");
+        }
+
         try {
             while (rs.next()) {
-                ResultSet rs2 = executeQuery("SELECT * FROM assessment WHERE id = " + rs.getInt("assessment"));
-
-                try {
-                    while (rs2.next()) {
-                        String[] collaborators = getAsNames(getAssessmentCollaborators(rs2.getInt("id")));
-                        assessments.add(new Assessment(rs2.getInt("id"), rs2.getInt("supervisor"), rs2.getString("title"), rs2.getString("desc"), rs2.getString("created"), rs2.getString("deadline"), getGroup(rs2.getInt("group")).getTitle(), collaborators));
+                ResultSet rs2;
+                if(getUserType(id).equals("student")) {
+                    rs2 = executeQuery("SELECT * FROM assessment WHERE id = " + rs.getInt("assessment"));
+                    try {
+                        while (rs2.next()) {
+                            String[] collaborators = getAsNames(getAssessmentCollaborators(rs2.getInt("id")));
+                            assessments.add(new Assessment(rs2.getInt("id"), rs2.getInt("supervisor"), rs2.getString("title"), rs2.getString("desc"), rs2.getString("created"), rs2.getString("deadline"), getGroup(rs2.getInt("group")).getTitle(), collaborators));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    String[] collaborators = getAsNames(getAssessmentCollaborators(rs.getInt("id")));
+                    assessments.add(new Assessment(rs.getInt("id"), rs.getInt("supervisor"), rs.getString("title"), rs.getString("desc"), rs.getString("created"), rs.getString("deadline"), getGroup(rs.getInt("group")).getTitle(), collaborators));
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return assessments.toArray(new Assessment[]{});
     }
@@ -85,6 +100,7 @@ public class DB {
 
     public Assessment getAssessmentById(int id) {
         Assessment assessment = null;
+
         ResultSet rs = executeQuery("SELECT * FROM assessment WHERE id = " + id);
 
         String[] collaborators = new String[]{};
@@ -160,6 +176,18 @@ public class DB {
         return null;
     }
 
+    public String getUserType(int id) {
+        ResultSet rs = executeQuery("SELECT usertype FROM user WHERE id = " + id + ";");
+        try {
+            while (rs.next()) {
+                return rs.getString("usertype");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Group getGroup(int id) {
         ResultSet rs = executeQuery("SELECT * FROM `group` WHERE id = " + id + ";");
         try {
@@ -219,6 +247,16 @@ public class DB {
         close(rs);
 
         return null;
+    }
+
+    public void addAssessment(Assessment asmt){
+        executeStetment("INSERT INTO `main`.`assessment` (`supervisor`, `desc`, `created`, `deadline`, `title`, `group`) VALUES ('" +
+                asmt.getSupervisor() + "', '" + asmt.getDesc()+ "', '" + asmt.getCreated() + "', '" +  asmt.getDeadline()+"', '" + asmt.getTitle() + "', '" + asmt.getGroup() +"');");
+    }
+
+    public void updateAssessment(Assessment asmt){
+        executeStetment("INSERT INTO `main`.`assessment` (`supervisor`, `desc`, `created`, `deadline`, `title`, `group`) VALUES ('" +
+                asmt.getSupervisor() + "', '" + asmt.getDesc()+ "', '" + asmt.getCreated() + "', '" +  asmt.getDeadline()+"', '" + asmt.getTitle() + "', '" + asmt.getGroup() +"');");
     }
 
     public void addCollaborator(int task, int user){

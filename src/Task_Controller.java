@@ -75,6 +75,16 @@ public class Task_Controller implements Initializable {
         Core.loadScene(Core.ASMT, new Object[]{assessment});
     }
 
+    @FXML
+    private void onSettingsButtonPressed(){
+        Core.loadScene(Core.SETTINGS, null);
+    }
+
+    @FXML
+    private void onSignOutButtonPressed(){
+        Core.loadScene(Core.LOGIN, null);
+    }
+
     @FXML void postButtonPressed(){
         Core.db.addPost(task.getID(), Core.getUser().getId(), post_txt.getText());
         Post post = new Post(task.getID(), Core.getUser().getId(), task.getID(), post_txt.getText());

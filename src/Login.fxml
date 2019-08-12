@@ -12,17 +12,17 @@
       <VBox fx:id="content" alignment="CENTER" prefHeight="750.0" prefWidth="1000.0">
          <children>
             <Label text="Please sign in" />
-            <TextField fx:id="username_txt" maxWidth="120.0" promptText="Username" text="student">
+            <TextField fx:id="username_txt" maxWidth="120.0" promptText="Username" text="teacher">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="password_txt" layoutX="10.0" layoutY="10.0" maxWidth="120.0" promptText="Password" text="student">
+            <TextField fx:id="password_txt" layoutX="10.0" layoutY="10.0" maxWidth="120.0" onAction="#login_buttonPressed" promptText="Password" text="teacher">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="signin_btn" mnemonicParsing="false" onAction="#login_buttonPressed" text="Button">
+            <Button fx:id="signin_btn" defaultButton="true" mnemonicParsing="false" onAction="#login_buttonPressed" text="Button" underline="true">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
