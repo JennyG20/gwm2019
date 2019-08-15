@@ -72,7 +72,11 @@ public class Task_Controller implements Initializable {
 
     @FXML
     public void back_buttonPressed() {
-        Core.loadScene(Core.ASMT, new Object[]{assessment});
+        if(Core.getUser().getUsertype().equals("teacher") || Core.getUser().getUsertype().equals("admin")){
+            Core.loadScene(Core.ASMT_EDIT, new Object[]{assessment});
+        } else {
+            Core.loadScene(Core.ASMT, new Object[]{assessment});
+        }
     }
 
     @FXML

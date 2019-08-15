@@ -30,13 +30,21 @@ public class Login_Controller extends Application {
 
     @FXML
     public void login_buttonPressed() {
-        User user = main.db.login(username_txt.getText(), password_txt.getText());
+        User user = null;
+        try{
+            user = main.db.login(username_txt.getText(), password_txt.getText());
+        } catch (Exception e){
+            
+        }
+        
         if (user != null) {
             Core.root = this.root;
             main.setUser(user);
             main.loadScene(main.MAIN, null);
-        } else {
-            //TODO: handle wrong credentials
+        } else if(DB.conn == null) {
+            signin_btn.setText("No Connection");
+        }else {
+            signin_btn.setText("Wrong Credentials");
         }
     }
 

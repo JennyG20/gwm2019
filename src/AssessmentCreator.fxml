@@ -13,17 +13,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" minHeight="750.0" minWidth="1000.0" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AssessmentCreator_Controller">
    <children>
       <BorderPane fx:id="content" prefHeight="750.0" prefWidth="1000.0">
          <right>
-            <VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eee;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e3faff;" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="username_label" text="User Name">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin></Label>
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="userrole_label" layoutX="20.0" layoutY="30.0" text="User Role: Student">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
@@ -110,7 +114,7 @@
                                        <VBox.margin>
                                           <Insets left="10.0" top="5.0" />
                                        </VBox.margin></TextArea>
-                                    <Button fx:id="publish_btn" mnemonicParsing="false" onAction="#onPublishButtonPressed" text="Publish">
+                                    <Button fx:id="publish_btn" defaultButton="true" mnemonicParsing="false" onAction="#onPublishButtonPressed" text="Publish">
                                        <VBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </VBox.margin>
@@ -124,7 +128,7 @@
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin></Line>
-                              <Button mnemonicParsing="false" text="New task" textAlignment="CENTER">
+                              <Button fx:id="newTaskButton" mnemonicParsing="false" onAction="#newTaskButtonPressed" text="New task" textAlignment="CENTER">
                                  <VBox.margin>
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>

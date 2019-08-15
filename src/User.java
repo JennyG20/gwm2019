@@ -18,6 +18,10 @@ public class User {
         this.assessments = Core.db.getAssessmentsByUser(id);
     }
 
+    public void reloadAssessments(){
+        this.assessments = Core.db.getAssessmentsByUser(id);
+    }
+
     public Assessment[] getAssessments() {
         return assessments;
     }

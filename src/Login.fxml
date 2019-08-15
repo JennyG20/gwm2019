@@ -3,29 +3,37 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="750.0" maxWidth="1000.0" minHeight="750.0" minWidth="1000.0" pickOnBounds="false" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Controller">
+<AnchorPane fx:id="root" maxHeight="750.0" maxWidth="1000.0" minHeight="750.0" minWidth="1000.0" pickOnBounds="false" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #e3faff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Controller">
    <children>
       <VBox fx:id="content" alignment="CENTER" prefHeight="750.0" prefWidth="1000.0">
          <children>
-            <Label text="Please sign in" />
+            <Label text="Please sign in">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <TextField fx:id="username_txt" maxWidth="120.0" promptText="Username" text="teacher">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="password_txt" layoutX="10.0" layoutY="10.0" maxWidth="120.0" onAction="#login_buttonPressed" promptText="Password" text="teacher">
+            <PasswordField fx:id="password_txt" layoutX="10.0" layoutY="10.0" maxWidth="120.0" onAction="#login_buttonPressed" promptText="Password" text="teacher">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
-            </TextField>
-            <Button fx:id="signin_btn" defaultButton="true" mnemonicParsing="false" onAction="#login_buttonPressed" text="Button" underline="true">
+            </PasswordField>
+            <Button fx:id="signin_btn" defaultButton="true" mnemonicParsing="false" onAction="#login_buttonPressed" text="Sign In" underline="true">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
          </children>
       </VBox>

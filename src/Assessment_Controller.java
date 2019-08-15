@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -87,6 +85,7 @@ public class Assessment_Controller implements Initializable {
 
     private void addTask(Task task, int num){
         TitledPane titledPane = new TitledPane();
+        titledPane.setExpanded(false);
         titledPane.setPrefWidth(780);
         titledPane.setMaxWidth(780);
         titledPane.setCollapsible(true);
@@ -135,7 +134,7 @@ public class Assessment_Controller implements Initializable {
         } else {
             button2.setText("Add As Collaborator");
             button2.setOnAction(event -> {
-                Core.db.addCollaborator(task.getID(), Core.getUser().getId());
+                Core.db.addTaskCollaborator(task.getID(), Core.getUser().getId());
                 button2.setDisable(true);
                 button2.setText("Already Collaborator");
             });

@@ -8,17 +8,21 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" minHeight="750.0" minWidth="1000.0" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_Controller">
    <children>
       <BorderPane fx:id="content" prefHeight="750.0" prefWidth="1000.0">
          <right>
-            <VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eee;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e3faff;" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="username_label" text="User Name">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin></Label>
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Label fx:id="userrole_label" layoutX="20.0" layoutY="30.0" text="User Role: Student">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
@@ -53,11 +57,27 @@
             </VBox>
          </right>
          <center>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ScrollPane maxWidth="800.0" prefHeight="750.0" prefWidth="800.0" BorderPane.alignment="CENTER">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0">
+                <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="800.0">
                      <children>
-                        <VBox fx:id="list" prefWidth="798.0" />
+                        <VBox fx:id="list" prefWidth="798.0">
+                           <children>
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="newAssessment_btn" defaultButton="true" mnemonicParsing="false" onAction="#newAssessmentButtonpressed" text="New Assessment">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="groupEditorButton" mnemonicParsing="false" onAction="#groupEditorButtonPressed" text="Group Editor">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children></VBox>
                      </children>
                   </AnchorPane>
               </content>

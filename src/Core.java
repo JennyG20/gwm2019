@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Core {
 
-    public static final int LOGIN = 0, MAIN = 1, ASMT = 2, TASK = 3, ASMT_EDIT = 4, TASK_EDIT = 5, SETTINGS = 6;
+    public static final int LOGIN = 0, MAIN = 1, ASMT = 2, TASK = 3, ASMT_EDIT = 4, TASK_EDIT = 5, SETTINGS = 6, GROUPS = 7;
 
     public static AnchorPane root;
     static DB db;
@@ -56,6 +56,9 @@ public class Core {
                 break;
             case SETTINGS:
                 loader.setLocation(Settings_Controller.class.getResource("Settings.fxml"));
+                break;
+            case GROUPS:
+                loader.setLocation(GroupEditor_Controller.class.getResource("GroupEditor.fxml"));
                 break;
         }
 

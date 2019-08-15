@@ -23,7 +23,13 @@ public class Main_Controller implements Initializable {
     private Label userid_label;
 
     @FXML
+    private Button newAssessment_btn;
+
+    @FXML
     private VBox list;
+
+    @FXML
+    private Button groupEditorButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,11 +37,30 @@ public class Main_Controller implements Initializable {
 
         userrole_label.setText(Core.getUser().getUsertype().toUpperCase());
 
+        if(Core.getUser().getUsertype().equals("student")){
+            newAssessment_btn.setManaged(false);
+        }
+        if(Core.getUser().getUsertype().equals("student") || Core.getUser().getUsertype().equals("teacher")){
+            groupEditorButton.setManaged(false);
+        }
+
         userid_label.setText("User ID: " + Core.getUser().getId());
+
+        Core.getUser().reloadAssessments();
 
         for(Assessment asmt : Core.getUser().getAssessments()){
             addAssessment(asmt);
         }
+    }
+
+    @FXML
+    private void groupEditorButtonPressed(){
+        Core.loadScene(Core.GROUPS, null);
+    }
+
+    @FXML
+    private void newAssessmentButtonpressed(){
+        Core.loadScene(Core.ASMT_EDIT, new Object[]{new Assessment()});
     }
 
     @FXML
@@ -58,11 +83,12 @@ public class Main_Controller implements Initializable {
 
         TitledPane titledPane = new TitledPane();
         titledPane.setPrefWidth(780);
+        titledPane.setExpanded(false);
         titledPane.setMaxWidth(780);
         titledPane.setCollapsible(true);
         titledPane.setExpanded(true);
         titledPane.setAnimated(false);
-        titledPane.setText(title + " - " + (Core.getUser().getUsertype().equals("teacher")?"":supervisor));
+        titledPane.setText(title + (Core.getUser().getUsertype().equals("teacher") || Core.getUser().getUsertype().equals("admin")?"":(" - " +supervisor)));
         titledPane.setPadding(new Insets(10,0,0,10));
         titledPane.setFont(Font.font("System", FontWeight.BOLD, 12));
 
@@ -86,7 +112,7 @@ public class Main_Controller implements Initializable {
         Button button1 = new Button();
         button1.setText("Open");
         button1.setOnAction(event -> {
-            if(Core.getUser().getUsertype().equals("student")) Core.loadScene(Core.ASMT, new Object[]{asmt});
+            if(!(Core.getUser().getUsertype().equals("teacher") || Core.getUser().getUsertype().equals("admin"))) Core.loadScene(Core.ASMT, new Object[]{asmt});
             else Core.loadScene(Core.ASMT_EDIT, new Object[]{asmt});
         });
 

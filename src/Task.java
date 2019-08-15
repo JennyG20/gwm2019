@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     private int ID, assessment;
     private String description, deadline;
     private String[] collaborators;
     private Integer[] collaboratorsID;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Task(int ID, int assessment, String description, String deadline, String[] collaborators, Integer[] collaboratorsID) {
         this.ID = ID;
@@ -12,6 +16,15 @@ public class Task {
         this.deadline = deadline;
         this.collaborators = collaborators;
         this.collaboratorsID = collaboratorsID;
+    }
+
+    public Task(int assessment) {
+        this.ID = -1;
+        this.assessment = assessment;
+        this.description = "";
+        this.deadline = formatter.format(LocalDate.now());
+        this.collaborators = new String[0];
+        this.collaboratorsID = new Integer[0];
     }
 
     public String getCollaboratorsAsOneString() {
